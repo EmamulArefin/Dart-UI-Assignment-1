@@ -40,13 +40,13 @@ class CourseCardsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 90, left: 16, right: 16),
+        padding: const EdgeInsets.only(top: 90, left: 10, right: 10),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 0.7,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            childAspectRatio: 0.6,
           ),
           itemCount: courses.length,
           itemBuilder: (context, index) {

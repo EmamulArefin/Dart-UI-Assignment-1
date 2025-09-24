@@ -18,73 +18,102 @@ class CourseCard extends StatelessWidget {
           // Image from assets
           Image.asset(
             course.imagePath,
-            height: 120,
+            height: 140,
             width: double.infinity,
             fit: BoxFit.cover,
           ),
+
           // Card body
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Info row
+                  // Info row - FIXED WITH FLEXIBLE
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        course.batch,
-                        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                      Flexible(child: _infoChip(Icons.group, course.batch)),
+                      const SizedBox(width: 4), // Small spacing
+                      Flexible(
+                        child: _infoChip(Icons.event_seat, course.seats),
                       ),
-                      Text(
-                        course.seats,
-                        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                      ),
-                      Text(
-                        course.days,
-                        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                      const SizedBox(width: 4), // Small spacing
+                      Flexible(
+                        child: _infoChip(Icons.calendar_today, course.days),
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   // Title
                   Expanded(
                     child: Text(
                       course.title,
-                      style: TextStyle(
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 12),
+
                   // Button
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-                    child: Container(
-                      width: 150,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey[300],
-                          foregroundColor: Colors.black87,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          elevation: 0,
-                          padding: EdgeInsets.symmetric(vertical: 12),
+                  SizedBox(
+                    width: double.infinity, // Full width button
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[300],
+                        foregroundColor: Colors.black87,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: () {},
-                        child: Text(
-                          "বিস্তারিত দেখি →",
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "বিস্তারিত দেখি →",
+                        style: TextStyle(fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),
                 ],
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _infoChip(IconData icon, String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 6.0,
+        vertical: 4.0,
+      ), // Reduced padding
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min, // Important: Only take needed space
+        children: [
+          Icon(icon, size: 10, color: Colors.grey[700]),
+          const SizedBox(width: 2),
+          Flexible(
+            // Allow text to shrink if needed
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.grey[700],
+              ), // Slightly smaller font
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
