@@ -10,8 +10,9 @@ class CourseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 3,
+      elevation: 2,
       clipBehavior: Clip.antiAlias,
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,7 +31,6 @@ class CourseCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Info row - FIXED WITH FLEXIBLE
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -59,8 +59,7 @@ class CourseCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
-
+                  //const SizedBox(height: 10),
                   // Button
                   SizedBox(
                     width: double.infinity, // Full width button
@@ -101,18 +100,14 @@ class CourseCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min, // Important: Only take needed space
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 10, color: Colors.grey[700]),
           const SizedBox(width: 2),
           Flexible(
-            // Allow text to shrink if needed
             child: Text(
               text,
-              style: TextStyle(
-                fontSize: 10,
-                color: Colors.grey[700],
-              ), // Slightly smaller font
+              style: TextStyle(fontSize: 10, color: Colors.black87),
               overflow: TextOverflow.ellipsis,
             ),
           ),
